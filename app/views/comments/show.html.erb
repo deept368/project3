@@ -1,11 +1,19 @@
-<h1><%= @user.name %></h1>
+<h1>
+  <strong>Comment:</strong>
+  <%= @comment.body %>
+</h1>
+
+</p>
+<strong>By:</strong>
+<%= link_to User.find(@comment.user_id).name, user_path(User.find(@comment.user_id)) %>
+<p>
 
 <ul>
-  <li><%= link_to "Edit", edit_user_path(@user) %></li>
-  <li><%= link_to "Destroy", user_path(@user), data: {
+  <li><%= link_to "Edit", edit_comment_path(@comment) %></li>
+  <li><%= link_to "Destroy", comment_path(@comment), data: {
     turbo_method: :delete,
     turbo_confirm: "Are you sure?"
   } %></li>
 </ul>
 
-<%= link_to "All Users", users_path %>
+<%= link_to "Post", post_path(Post.find(@comment.post_id)) %>
