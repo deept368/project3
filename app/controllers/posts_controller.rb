@@ -4,7 +4,11 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    begin
+      @post = Post.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render :json => "404"
+    end
   end
 
   def create
