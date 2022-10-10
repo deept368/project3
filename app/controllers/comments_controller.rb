@@ -1,49 +1,40 @@
 class CommentsController < ApplicationController
-  def index
-    @users = User.all
-  end
-
-  def show
-    @user = User.find(params[:id])
-  end
-
-  def new
-    @user = User.new
-  end
-
   def create
-    @user = User.new(user_params)
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.create(comment_params)
+    redirect_to post_path(@post)
+  end
 
-    if @user.save
-      redirect_to @user
-    else
-      render :new, status: :unprocessable_entity
+  def index
+    @comments = Comment.all
+  end
+  def show
+    begin
+      @comment = Comment.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render :json => "404"
     end
   end
 
   def edit
-    @user = User.find(params[:id])
+    @comment = Comment.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
-
-    if @user.update(user_params)
-      redirect_to @user
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    @comment = Comment.find(params[:id])
+    @comment.update(comment_params)
+    redirect_to post_path(Post.find(@comment.post_id))
   end
 
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    redirect_to root_path, status: :see_other
+    @comment = Comment.find(params[:id])
+    @post = Post.find(@comment.post_id)
+    @comment.destroy
+    redirect_to post_path(@post), status: :see_other
   end
 
   private
-  def user_params
-    params.require(:user).permit(:name)
+  def comment_params
+    params.require(:comment).permit(:user_id, :body)
   end
 end

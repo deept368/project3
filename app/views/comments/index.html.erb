@@ -1,11 +1,15 @@
-<h1>Users</h1>
+<h1>Comments</h1>
 
 <ul>
-  <% @users.each do |user| %>
+  <% @comments.each do |comment| %>
     <li>
-      <%= link_to user.name, user %>
+      <%= link_to comment.body, comment %>
+      <br>
+      <p>
+        <strong>By:</strong>
+        <%= link_to User.find(comment.user_id).name, user_path(User.find(comment.user_id)) %>
+      </p>
+      <p>***********************************</p>
     </li>
   <% end %>
 </ul>
-
-<%= link_to "New User", new_user_path %>

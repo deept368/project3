@@ -1,19 +1,15 @@
-<h1>Edit User</h1>
-
-<%= form_with model: @user do |form| %>
-  <div>
-    <%= form.label :user %><br>
-    <%= form.text_field :name %>
-    <% @user.errors.full_messages_for(:name).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
-  </div>
-
-  <div>
+<h2>Edit Comment:</h2>
+<%= form_with model: @comment do |form| %>
+  <p>
+    <%= form.label :User_Id %><br>
+    <%= form.text_field :user_id %>
+  </p>
+  <p>
+    <%= form.label :Comment %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
     <%= form.submit %>
-  </div>
+  </p>
 <% end %>
-
-<br>
-<%= link_to "All Users", users_path %>
 
