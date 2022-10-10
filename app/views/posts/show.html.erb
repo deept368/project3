@@ -5,6 +5,11 @@
     <%= @post.title %>
   </h1>
 
+  </p>
+  <strong>By:</strong>
+  <%= link_to User.find(@post.user_id).name, user_path(User.find(@post.user_id)) %>
+  <p>
+
   <p>
     <%= @post.body %>
   </p>
