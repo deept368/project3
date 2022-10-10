@@ -1,0 +1,18 @@
+
+<ul>
+  <h1>
+    <strong>Title:</strong>
+    <%= @post.title %>
+  </h1>
+
+  <p>
+    <%= @post.body %>
+  </p>
+</ul>
+
+<ul>
+  <li><%= link_to "Edit", edit_post_path(@post) %></li>
+</ul>
+
+
+<%= link_to "All Posts", posts_path %>
