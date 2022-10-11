@@ -3,10 +3,16 @@
   <p>
     <%= form.label :User_Id %><br>
     <%= form.text_field :user_id %>
+    <% @comment.errors.full_messages_for(:user_id).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </p>
   <p>
     <%= form.label :Comment %><br>
     <%= form.text_area :body %>
+    <% @comment.errors.full_messages_for(:body).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </p>
   <p>
     <%= form.submit %>
