@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     begin
       @post = Post.find(params[:id])
     rescue ActiveRecord::RecordNotFound
-      render :json => "404"
+      render :json => "404 Not found"
     end
   end
 
